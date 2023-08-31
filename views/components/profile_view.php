@@ -1,12 +1,13 @@
 <?php
 
 
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+error_reporting(E_ALL);*/
 require __DIR__ . '/../../actions/profile_action.php';
 
+
+include __DIR__ . '/header.php';
 
 
 // Vérification de la présence des données de session
@@ -35,57 +36,40 @@ if (is_string($serializedPersonne)) {
     var_dump($serializedPersonne);  // Pour le debug
     die("La valeur à désérialiser n'est ni une chaîne ni un objet.");
 }
-
-if (isset($_SESSION["profiles"])): ?>
-<?php foreach ($_SESSION["profiles"] as $profileKey => $serializedPersonne):
-var_dump($_SESSION['profiles']);
-$Personne = unserialize($serializedPersonne); // Désérialisez l'objet ici
-
 ?>
+
 <body>
-<?php
-include __DIR__ . '/header.php';
-?>
 <div class="container mt-5">
     <h1>Profiles</h1>
-    <div class="card p-3 shadow">
-        <div class="profile-section">
-
-            <div class="card">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-
-                        <img src="/../fichiers/photos/<?php echo $Personne->getPhoto(); ?>" class="card-img"
-                             alt="Photo de profil">
-                        <!-- Mettez le bon chemin vers l'image -->
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-
-                            <h4 class="card-title"><?php echo $Personne->getNom(); ?></h4>
+    <div class="profile-section">
+        <?php if (isset($_SESSION["profiles"])): ?>
+            <?php foreach ($_SESSION["profiles"] as $profileKey => $serializedPersonne):
+                $Personne = unserialize($serializedPersonne); // Désérialisez l'objet ici
+                ?>
+                <div class="card p-3 shadow">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/../fichiers/photos/<?php echo $Personne->getPhoto(); ?>" class="card-img" alt="Photo de profil">
+                        </div>
+                        <div class="col-md-8">
                             <div class="card-body">
-
-
-                                <p><strong>Compte en Banque :</strong> <?php echo $Personne->getCompteEnBanque(); ?>$Can
-                                </p>
+                                <h4 class="card-title"><?php echo $Personne->getNom(); ?></h4>
+                                <!-- J'ai enlevé la div card-body imbriquée ici -->
+                                <p><strong>Compte en Banque :</strong> <?php echo $Personne->getCompteEnBanque(); ?>$Can</p>
                                 <p><strong>Salaire :</strong> <?php echo $Personne->getSalaire(); ?>$Can</p>
                                 <p><strong>Nombre d'Animaux :</strong> <?php echo $Personne->getNombreAnimaux(); ?></p>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
-            <?php else: ?>
-                <p>Aucun profil n'a été créé pour le moment.</p>
-            <?php endif; ?>
-        </div> <!-- Fin de la div profile-section -->
-    </div> <!-- Fin de la div card -->
+        <?php else: ?>
+            <p>Aucun profil n'a été créé pour le moment.</p>
+        <?php endif; ?>
+    </div> <!-- Fin de la div profile-section -->
 </div> <!-- Fin de la div container -->
-
-<?php include __DIR__ . '/footer.php' ?>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<?php include __DIR__ . '/footer.php' ?>
+
