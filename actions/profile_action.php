@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Permet de stocker les données dans le tampon de sortie
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -18,9 +19,11 @@ function CreateProfile()
     // Validation du formulaire
     $validation = new Validation($_POST);  // Assurez-vous que la classe Validation est bien définie
     if (!$validation->isValid()) {
-        $_SESSION["error"] = $validation->getErrors();
-        header('Location: /Profil_Cards_PHP/views/components/profile_view.php');
-
+        error_log("Invalid form");  // Pour le log serveur
+        var_dump($validation->getErrors());  // Pour le log dans la sortie (à enlever une fois le debug terminé)
+        $_SESSION["errors"] = $validation->getErrors();
+        header('Location: /Profil_Cards_PHP/views/components/formulaire.php');
+        ob_end_flush();// Permet de vider le tampon de sortie et d'envoyer les données au navigateur
         exit;
     }
 
@@ -46,8 +49,9 @@ function CreateProfile()
     }
 
     // Création de l'objet Personne
+    var_dump($_POST);
     $Personne = new utilisateur(
-        $_POST['nom'],
+        $_POST['prenom'],
         $_POST['compteEnBanque'],
         $_POST['salaire'],
         $_POST['animaux'],

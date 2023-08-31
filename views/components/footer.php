@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p>&copy; 2023 Martin, Tonka et Hubert</p>
+                <p>&copy; 2023 The Profiler</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <p><a href="#">Politique de confidentialité</a> | <a href="#">Conditions d'utilisation</a></p>

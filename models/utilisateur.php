@@ -6,7 +6,7 @@ class utilisateur
 
     const NB_HEURES_TRAVAIL = 8.0;
 
-    protected string $nom;
+    protected string $prenom;
     protected float $compteEnBanque;
 
     private float $salaire;
@@ -15,10 +15,10 @@ class utilisateur
 
     private int $nbAnimaux;
 
-    public function __construct(string $nom, float $compteEnBanque, float $salaire, int $animaux, $photo)
+    public function __construct(string $prenom, float $compteEnBanque, float $salaire, int $animaux, $photo)
     {
 
-        $this->nom = $nom;
+        $this->prenom = $prenom;
         $this->compteEnBanque = $compteEnBanque;
         $this->salaire = $salaire;
         $this->nbAnimaux = $animaux;
@@ -26,12 +26,12 @@ class utilisateur
 
     }
 
-    public function getNom(): string
+    public function getPrenom(): string
     {
-        if ($this->nom == "") {
-            return "nom non defini";
+        if ($this->prenom == "") {
+            return "Prenom non defini";
         } else {
-            return $this->nom;
+            return $this->prenom;
         }
     }
 

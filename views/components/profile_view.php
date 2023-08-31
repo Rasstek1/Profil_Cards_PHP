@@ -1,42 +1,42 @@
 <?php
+// Importation des dépendances et configuration pour le débogage
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
-
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
+// Inclusion des fichiers nécessaires
 require __DIR__ . '/../../actions/profile_action.php';
 
+include __DIR__ . '/header.php';?>
 
-include __DIR__ . '/header.php';
-
-
-// Vérification de la présence des données de session
+<?php
+// Vérifie si la variable de session 'targetPath' existe
 if (!isset($_SESSION["targetPath"])) {
     die("Erreur: La variable targetPath de la session est manquante.");
 }
 
+// Vérifie si la variable de session 'profiles' existe
 if (!isset($_SESSION["profiles"])) {
     die("Erreur: La variable profiles de la session est manquante.");
 }
 
-?>
-
-
-<?php
-?>
-
-
-<?php
+// Récupère et désérialise le premier profil de la session
 $serializedPersonne = $_SESSION["profiles"][0];
+
+
+
+// Vérifie le type de la variable sérialisée pour décider de la désérialisation
 if (is_string($serializedPersonne)) {
     $Personne = unserialize($serializedPersonne);
 } elseif (is_object($serializedPersonne)) {
     $Personne = $serializedPersonne;
 } else {
-    var_dump($serializedPersonne);  // Pour le debug
+    // Affiche des informations pour le débogage et arrête l'exécution du script
+    var_dump($serializedPersonne);
     die("La valeur à désérialiser n'est ni une chaîne ni un objet.");
 }
 ?>
+
 
 <body>
 <div class="container mt-5">
@@ -53,7 +53,7 @@ if (is_string($serializedPersonne)) {
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h4 class="card-title"><?php echo $Personne->getNom(); ?></h4>
+                                <h4 class="card-title"><?php echo $Personne->getPrenom(); ?></h4>
                                 <!-- J'ai enlevé la div card-body imbriquée ici -->
                                 <p><strong>Compte en Banque :</strong> <?php echo $Personne->getCompteEnBanque(); ?>$Can</p>
                                 <p><strong>Salaire :</strong> <?php echo $Personne->getSalaire(); ?>$Can</p>

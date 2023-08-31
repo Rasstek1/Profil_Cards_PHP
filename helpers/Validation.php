@@ -12,25 +12,23 @@ class Validation
     }
 
     public function isValid() {
-        // Ici, vous pouvez ajouter des vérifications en fonction des besoins de votre application.
-        if (empty($this->data['nom'])) {
-            $this->errors[] = 'Le nom est requis.';
+        $allFields = ['prenom', 'compteEnBanque', 'salaire', 'animaux'];
+        $allFieldsFilled = true;
+
+        foreach ($allFields as $field) {
+            if (empty($this->data[$field])) {
+                $allFieldsFilled = false;
+                break;
+            }
         }
 
-        if (empty($this->data['compteEnBanque'])) {
-            $this->errors[] = 'Le compte en banque est requis.';
+        if (!$allFieldsFilled) {
+            $this->errors[] = 'Tous les champs sont requis.';
         }
 
-        if (empty($this->data['salaire'])) {
-            $this->errors[] = 'Le salaire est requis.';
-        }
-
-        if (empty($this->data['animaux'])) {
-            $this->errors[] = 'Le nombre d\'animaux est requis.';
-        }
-
-        return empty($this->errors);
+        return $allFieldsFilled;
     }
+
 
     public function getErrors() {
         return $this->errors;

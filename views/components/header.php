@@ -11,43 +11,35 @@
         }
 
         .margin {
-            margin-bottom: 150px;
+            margin-bottom: 25px;
         }
 
-        .navbar-collapse {
-            position: absolute;
-            top: 100%;
-            right: 15.5%; /* Aligné avec le bouton hamburger */
-            left: auto;  /* Aligné avec le bouton hamburger */
-            background: #fff;
-            z-index: 1000;
+        .nav-link{
+            font-size: 20px;
         }
+
     </style>
 </head>
 <body>
 
 <nav class="navbar margin navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-size: 36px;">THE PROFILER</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">À Propos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="/index.php" style="font-size: 36px;">THE PROFILER</a>
+        <!-- Suppression du bouton hamburger ici -->
+        <ul class="navbar-nav ms-auto"> <!-- Utilisation directe de la liste de navigation -->
+            <li class="nav-item">
+                <a class="nav-link" href="/index.php">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="formulaire.php">Formulaire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile_view.php">Profiles</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
 </body>
 </html>
+
